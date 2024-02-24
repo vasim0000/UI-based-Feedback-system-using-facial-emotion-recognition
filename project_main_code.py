@@ -18,6 +18,7 @@ if not cap.isOpened():
 counter=0
 
 os.makedirs('frames')
+os.makedirs('faces')
 
 while True:
     ret, frame = cap.read()
@@ -36,19 +37,20 @@ while True:
     cv2.imshow('Video',frame)
 
     if counter%24==0:
-        cv2.imwrite('path\\test_images%d.jpg' % counter, frame)
+        cv2.imwrite('frames\\test_images%d.jpg' % counter, frame)
 
     counter+=1
 
     if cv2.waitKey(25) & 0xFF == ord('q'):
         break
 
-cap.release()
-
-
 counter=0
-os.makedirs('faces')
+
 for x in edited_list:
-    cv2.imwrite('faces//face%d.jpg' %counter,x)
+    cv2.imwrite('faces\\face%d.jpg' %counter,x)
+    if counter==50:
+        break
     counter+=1
+
+cap.release()
 cv2.destroyAllWindows()
